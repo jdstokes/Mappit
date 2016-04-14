@@ -22,6 +22,7 @@ public class createHolders : MonoBehaviour {
 			GameObject newH = Instantiate(placeHolder);
 			newH.name = store.name + "_holder";
 			newH.transform.position = store.position;
+			newH.transform.rotation = store.rotation;
 			newH.transform.SetParent (house.transform);
 			
 			yield return null;

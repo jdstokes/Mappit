@@ -90,6 +90,9 @@ void OnMouseUp(){
 				Vector3 center = new Vector3(hit.collider.bounds.center.x,gameObject.transform.position.y,hit.collider.bounds.center.z);
 				gameObject.transform.position = center;
 
+//				FindTrueRotation();
+				gameObject.transform.rotation = hit.collider.gameObject.transform.rotation;
+
 
 			}
 
@@ -106,6 +109,8 @@ void OnMouseDrag()
 
 	if(dragable)
 	{
+
+	
 	mouseDrag = true;
 	GameControl.selectedStoreName = "";
 	screenPoint = Camera.main.WorldToScreenPoint (gameObject.transform.position);
@@ -146,7 +151,23 @@ void PresentStoreNameOff(){
 		GameControl.selectedStoreName = "";
 
 	}
-	
+
+
+
+void FindTrueRotation(){
+
+	foreach(Store store in GameControl.stores_all){
+
+		if(gameObject.name == store.name){
+
+			gameObject.transform.eulerAngles=store.rotation_true;
+		}
+
+	}
+
+
+}
+
 }
 	
 
