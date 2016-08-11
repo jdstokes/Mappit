@@ -23,7 +23,7 @@ public class moveStore : MonoBehaviour {
 	private bool overHolder = false;
 	private 		RaycastHit hit;
 
-	void Awake(){
+	void Start(){
 
 		shops = gameObject.transform.parent.GetComponent<Shops>();
 		dragable = shops.dragable;
@@ -34,7 +34,7 @@ void Update(){
 
 		LayerMask myLayerMask = (1 << 8);
 
-		if(dragable && mouseDrag && mapDraw.store_selected == gameObject.name){
+		if(dragable && mouseDrag && MapDraw.store_selected == gameObject.name){
 		Vector3 origin = new Vector3( gameObject.transform.position.x,gameObject.transform.position.y,gameObject.transform.position.z);
 		Vector3 fwd = transform.TransformDirection(Vector3.down);
 			if(Physics.SphereCast (origin,15,fwd,out hit,Mathf.Infinity,myLayerMask))
@@ -64,7 +64,7 @@ void OnMouseDown(){
 		if(dragable){
 		mouseDown = true;
 		GameControl.selectedStoreName = "";
-		mapDraw.store_selected = gameObject.name;
+		MapDraw.store_selected = gameObject.name;
         
 		if (getStartingPosition) {
 
@@ -90,7 +90,6 @@ void OnMouseUp(){
 				Vector3 center = new Vector3(hit.collider.bounds.center.x,gameObject.transform.position.y,hit.collider.bounds.center.z);
 				gameObject.transform.position = center;
 
-//				FindTrueRotation();
 				gameObject.transform.rotation = hit.collider.gameObject.transform.rotation;
 
 

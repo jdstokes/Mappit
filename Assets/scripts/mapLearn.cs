@@ -17,7 +17,6 @@ public class mapLearn : MonoBehaviour {
 		foreach (Transform store in shops.transform) {
 			GameControl.stores_all.Add (new Store (store.name, store.position, store.localEulerAngles));
 			GameControl.store_names.Add (store.name);
-			Debug.Log (store.name + " " + store.position);
 
 			}
 			

@@ -5,11 +5,11 @@ public class createHolders : MonoBehaviour {
 
 	private GameObject shops;
 	public GameObject placeHolder;
-	private GameObject house;
+	private GameObject house4holders;
 	
 	void Awake(){
 		shops = GameObject.Find ("ShopsTrue");
-		house = GameObject.Find ("House");
+		house4holders = GameObject.Find ("house4holders");
 
 
 		StartCoroutine(BuildHolders());
@@ -17,19 +17,18 @@ public class createHolders : MonoBehaviour {
 	
 	
 	IEnumerator   BuildHolders(){
-		Debug.Log ("Build House");
 		foreach (Transform store in shops.transform) {
 			GameObject newH = Instantiate(placeHolder);
 			newH.name = store.name + "_holder";
 			newH.transform.position = store.position;
 			newH.transform.rotation = store.rotation;
-			newH.transform.SetParent (house.transform);
+			newH.transform.SetParent (house4holders.transform);
 			
 			yield return null;
 			
 		}
 
-		house.SetActive (false);
+		house4holders.SetActive (false);
 		
 	}
 	

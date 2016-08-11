@@ -20,8 +20,9 @@ public class Store : MonoBehaviour {
 		name = newName;
 		newPosition = new Vector3(newPosition.x,0f,newPosition.z); 
 
-		position_true =newPosition;
+		position_true = newPosition;
 		rotation_true = newRotation;
+
 	}
 
 	public void SetBaseLocation(Store store, Vector3 newPosition, Vector3 newRotation){
@@ -30,6 +31,7 @@ public class Store : MonoBehaviour {
 		store.rotation_base = newRotation;
 		store.position_distance_base =  position_true - position_base;
 
+
 	}
 
 	public void SetMapLocation(Store store, Vector3 newPosition, Vector3 newRotation){
@@ -37,7 +39,6 @@ public class Store : MonoBehaviour {
 		store.position_map = newPosition;
 		store.rotation_map = newRotation;
 		store.position_distance_map =  position_true - position_map;
-		print (store.name + " " + store.position_distance_map );
 
 
 	}

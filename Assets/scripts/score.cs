@@ -11,7 +11,7 @@ public class score : MonoBehaviour {
 	void Start(){
 		score2print = GameControl.GetScore();
     	txt = gameObject.GetComponent<Text>(); 
-		txt.text="Score : " + score2print.ToString ("F0") + "% correct";
+		txt.text="Score : " + score2print.ToString ("F0") + " correct";
 
 	}
 	

@@ -6,9 +6,9 @@ public class flipStore : MonoBehaviour {
 
 	public void rotateStoreRight(){
 
-		if(mapDraw.store_selected!= null)
+		if(MapDraw.store_selected!= null)
 		{
-		GameObject curStore = GameObject.Find(mapDraw.store_selected);
+		GameObject curStore = GameObject.Find(MapDraw.store_selected);
 
 //		curStore.transform.Rotate(Vector3.up,90);
 			print ("flip " + curStore.transform.localEulerAngles);

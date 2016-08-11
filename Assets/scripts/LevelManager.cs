@@ -19,18 +19,6 @@ public class LevelManager : MonoBehaviour {
 
 
 
-	void Update() {
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			
-			print ("space!");
-			Application.LoadLevel (Application.loadedLevel + 1);
-		} else if (Input.GetKeyDown (KeyCode.Backspace)) {
-			print ("delete!");
-			
-			Application.LoadLevel (Application.loadedLevel - 1);
-		}
-
-	}
 
 
 

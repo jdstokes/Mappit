@@ -14,7 +14,8 @@ public class GameControl : MonoBehaviour {
 	public static bool drawMode = true; 
 	public static GameControl control;
 	public static GetMapScore mapScore;
-	public static float thresh = 50f;
+	public static float thresh = 8;
+	public static string subjectID;
 
 	void Awake () {
 		if(control==null)
@@ -33,9 +34,18 @@ public static float GetScore(){
 
 		mapScore = new GetMapScore(stores_all);
 
-		return mapScore.score;
+		return mapScore.scoreTotal;
 
 }
+
+public  void GetID(){
+
+		GameObject inputFieldGo = GameObject.Find("InputField_ID");
+		InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
+		subjectID = inputFieldCo.text;
+
+
+	}
 
 	
 

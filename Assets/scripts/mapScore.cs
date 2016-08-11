@@ -12,7 +12,7 @@ public class mapScore : MonoBehaviour {
 		 loseUI.SetActive(false);
 	}
 	public void mapScoreUIswitch(){
-		if(GameControl.GetScore() > GameControl.thresh){
+		if(GameControl.GetScore() >= GameControl.thresh){
 			winUI.SetActive(true);
 
 		}
