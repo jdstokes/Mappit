@@ -16,6 +16,8 @@ public class GameControl : MonoBehaviour {
 	public static GetMapScore mapScore;
 	public static float thresh = 8;
 	public static string subjectID;
+	public static int roundNum = 0;
+	public static int maxRounds = 6;
 
 	void Awake () {
 		if(control==null)

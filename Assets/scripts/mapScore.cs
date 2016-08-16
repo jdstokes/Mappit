@@ -14,7 +14,9 @@ public class mapScore : MonoBehaviour {
 	public void mapScoreUIswitch(){
 		if(GameControl.GetScore() >= GameControl.thresh){
 			winUI.SetActive(true);
-
+		}
+		else if(GameControl.roundNum == GameControl.maxRounds){
+			winUI.SetActive(true);
 		}
 		else
 		{

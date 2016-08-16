@@ -6,7 +6,8 @@ using UnityEngine.UI;
 
 
 public class MapDraw : MonoBehaviour {
-	private int count= 0;
+
+
 	private Transform shop;
 	private GameObject background;
 	public static  string store_selected;
@@ -29,9 +30,8 @@ public class MapDraw : MonoBehaviour {
 
 		background = GameObject.Find ("Background");
 		mapDrawCanvas = GameObject.Find ("Canvas");
-//		Directory.CreateDirectory(Application.dataPath + "/Data/");
+	    Directory.CreateDirectory(Application.dataPath + "/Data/");
 		newFile = new StreamWriter(GameControl.subjectID + "_output.txt",true);
-		newFile.WriteLine("hello y'all");
 		newFile.Close();
 
 
@@ -74,7 +74,8 @@ public void GetMapCoordinates(){
 					
 					store.SetMapLocation(store, child.position, child.localEulerAngles);
 
-					string line = System.DateTime.Now + "," +store.name +"," +child.position +"," +child.localEulerAngles;
+					string line = GameControl.subjectID + "," + GameControl.roundNum + ","+ System.DateTime.Now + "," +
+						store.name +"," + child.position +"," + child.localEulerAngles;
 
 					print (line);
 					newFile = new StreamWriter(GameControl.subjectID + "_output.txt",true);
