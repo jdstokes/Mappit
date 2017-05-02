@@ -74,11 +74,6 @@ public class Experiment1 : MonoBehaviour {
 		}
 	}
 
-//	public void ReloadCurrentScene(){
-//		Scene scene = SceneManager.GetActiveScene();
-//		SceneManager.LoadScene(scene.name);
-//
-//	}
 
 	void BuildBlockList(){
 

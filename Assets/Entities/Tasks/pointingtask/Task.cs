@@ -41,29 +41,18 @@ public class Task : MonoBehaviour {
 
 		if(nextTrial)
 		{
-		JRD curJRD = LoadJRDquestions.JRDlist[index];
-		question.text = curJRD.question;
+		    JRD curJRD = LoadJRDquestions.JRDlist[index];
+		    question.text = curJRD.question;
 
-
-		if (Input.GetKeyDown(KeyCode.Return)){
-
-
-
-				StartCoroutine(SetupNextTrial());
-
-
-		}
-
+		    if (Input.GetKeyDown(KeyCode.Return)){
+		         StartCoroutine(SetupNextTrial());
+		    }
 		}
 		else if (!nextTrial)
 		{
 			question.text = "";
-
 		}
-
-		
-	
-		}
+	}
 
 
 	IEnumerator SetupNextTrial()
@@ -83,11 +72,10 @@ public class Task : MonoBehaviour {
 
 
 	void LogData(){
-
 		string line = index.ToString() + '\t' + question.text+ '\t' + arrow.transform.rotation + '\t' + '\n';
 		File.AppendAllText( dataf,line);
+		print(dataf + ": " + line);
 		
-
 	}
 
 }

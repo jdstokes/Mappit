@@ -19,7 +19,7 @@ public class GameControl : MonoBehaviour {
 	public static float thresh = 8;
 	public static string subjectID;
 	public static int roundNum = 0;
-	public static int maxRounds = 6;
+	public static int maxRounds = 3;
 
 	void Awake () {
 		if(control==null)
@@ -52,15 +52,19 @@ public  void GetID(){
 	}
 
 
-
-
-
 	public void ReloadCurrentScene(){
 		Scene scene = SceneManager.GetActiveScene();
 		SceneManager.LoadScene(scene.name);
-
 	}
 
-	
 
+	public void LoadNextScene(){
+		Scene scene = SceneManager.GetActiveScene();
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
+
+
+   public void QuitExperiment(){
+		Application.Quit();
+	}
 }
