@@ -86,3 +86,36 @@ Version notes:
 
 1.3.5
 -Fixed issue with Unity changing build log format in 5.2.1
+
+1.3.6
+-Added select/deselect all functionality for types
+-Cleanup/Refactor
+-Added foldout for assemblies
+-The "Delete Folder" confirmation window now states which folder it will delete
+
+2.0.0
+-Improvements to UI
+-New feature: All deleted assets can now be automatically backed up in an unitypackage
+-New feature: Added manual "Delete empty folders" functionality
+-New feature: Added direct link to build settings
+-New feature: Asset Hunter settings now allows to exclude assets by path substring
+-New feature: Asset "AssetHunterSceneOverview" which allows you to locate enabled/disabled and unreferenced scenes
+-New feature: All used asset have their filesize listed
+-New feature: All folders with used asset have their local and total filesize listed
+-Made sure a new settings file is generated if none exist
+-Added window pane titlecontent
+-Improved base empty folder deletetion to ignore the following filetypes:
+	".meta" 
+	"thumbs.db"
+	".orig"
+	".ds_store"
+	".workspace.mel"
+	".mayaswatches"
+
+2.1.0
+-Modified the warnings for irregular assets in build log
+-Greatly improved performance when reading log
+-Added option for forced memory cleanup in settings
+
+2.1.1
+-Reinstated per-folder OutOfMemory safeguard to fix rare Unity crash

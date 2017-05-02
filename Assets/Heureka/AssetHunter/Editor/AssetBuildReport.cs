@@ -87,7 +87,7 @@ namespace HeurekaGames
             //TODO Get all the different splash screens and config files somehow
             List<UnityEngine.Object> splash = new List<UnityEngine.Object>();    
             splash.Add(UnityEditor.PlayerSettings.xboxSplashScreen);
-
+            
             //Loop the entries
             foreach (UnityEngine.Object obj in splash)
             {
@@ -101,8 +101,6 @@ namespace HeurekaGames
                 newAsset.SetSize(0.0f, "--");
                 m_BuildSizeList.Add(newAsset);
             }
-
-            //TODO And the icons from METRO as well
 
 #if !UNITY_5
             List<string> targetResourcePaths = new List<string>();
@@ -175,7 +173,6 @@ namespace HeurekaGames
                     "certificatePath"
                 };
 
-            //TODO, run through these and find the ones with paths to icons etc
             foreach (PropertyInfo p in properties)
             {
                 // Only work with strings

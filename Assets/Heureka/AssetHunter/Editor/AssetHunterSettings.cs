@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 namespace HeurekaGames
 {
@@ -9,22 +10,28 @@ namespace HeurekaGames
     public class AssetHunterSettings : ScriptableObject
     {
         [SerializeField]
-        public List<Object> m_DirectoryExcludes = new List<Object>();
+        public List<UnityEngine.Object> m_DirectoryExcludes = new List<UnityEngine.Object>();
 
         [SerializeField]
         public List<SerializableSystemType> m_AssetTypeExcludes = new List<SerializableSystemType>();
+
+        [SerializeField]
+        public List<string> m_AssetSubstringExcludes = new List<string>();
+
+        [SerializeField]
+        public bool m_MemoryCleanupActive = false;
 
         internal static string GetAssetPath()
         {
             return AssetHunterSettingsCreator.GetAssetPath();
         }
 
-        internal bool ValidateDirectory(Object newDir)
+        internal bool ValidateDirectory(UnityEngine.Object newDir)
         {
             return !m_DirectoryExcludes.Contains(newDir);
         }
 
-        internal void ExcludeDirectory(Object newDir)
+        internal void ExcludeDirectory(UnityEngine.Object newDir)
         {
             m_DirectoryExcludes.Add(newDir);
         }
@@ -39,6 +46,16 @@ namespace HeurekaGames
             m_AssetTypeExcludes.Add(newtype);
         }
 
+        internal bool ValidateSubstring(string newSubstring)
+        {
+            return !m_AssetSubstringExcludes.Contains(newSubstring);
+        }
+
+        internal void ExcludeSubstring(string newSubstring)
+        {
+            m_AssetSubstringExcludes.Add(newSubstring);
+        }
+
         internal void RemoveDirectoryAtIndex(int indexer)
         {
             m_DirectoryExcludes.RemoveAt(indexer);
@@ -48,6 +65,12 @@ namespace HeurekaGames
         internal void RemoveTypeAtIndex(int indexer)
         {
             m_AssetTypeExcludes.RemoveAt(indexer);
+            EditorUtility.SetDirty(this);
+        }
+
+        internal void RemoveSubstringAtIndex(int indexer)
+        {
+            m_AssetSubstringExcludes.RemoveAt(indexer);
             EditorUtility.SetDirty(this);
         }
 
@@ -64,6 +87,11 @@ namespace HeurekaGames
         internal bool HasTypeExcludes()
         {
             return m_AssetTypeExcludes.Count >= 1;
+        }
+
+        internal bool HasSubStringExcludes()
+        {
+            return m_AssetSubstringExcludes.Count >= 1;
         }
     }
 }

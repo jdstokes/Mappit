@@ -12,8 +12,14 @@ namespace HeurekaGames
 
         public static void SetWindowValues(EditorWindow editor, Texture icon, string title)
         {
+#if UNITY_5_3_OR_NEWER
+            editor.titleContent.image = icon;
+            editor.titleContent.text = title;
+#else
+            editor.title = title;
+#endif
 
-            GUIContent guiContent;
+            /*GUIContent guiContent;
             if (m_windowContentDict == null) 
                 m_windowContentDict = new Dictionary<EditorWindow, GUIContent>();
             
@@ -35,15 +41,15 @@ namespace HeurekaGames
                 if (guiContent.image != icon) guiContent.image = icon;
                 if (title != null && guiContent.text != title) guiContent.text = title;
                 m_windowContentDict.Add(editor, guiContent);
-            }
+            }*/
         }
 
-        static GUIContent getContent(EditorWindow editor)
+        /*static GUIContent getContent(EditorWindow editor)
         {
             const BindingFlags bFlags = BindingFlags.Instance | BindingFlags.NonPublic;
             PropertyInfo p = typeof(EditorWindow).GetProperty("cachedTitleContent", bFlags);
             if (p == null) return null;
             return p.GetValue(editor, null) as GUIContent;
-        }
+        }*/
     }
 }

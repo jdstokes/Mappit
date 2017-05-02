@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using HeurekaGames;
+using System;
 
 public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceiver
 {
@@ -12,7 +13,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
     {
         BuildReport,
         UnusedAssets,
-        //Settings
+        UnusedScripts
     }
 
     [SerializeField]
@@ -100,6 +101,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
     #endregion
 
     private bool m_showTypesFoldout = true;
+    private bool m_showAssemblyFoldout = false;
 
     [SerializeField]
     private AssetObjectInfo m_assetMarkedForDeletion = null;
@@ -130,6 +132,8 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
 
     //Save initial Color
     private static Color m_IntialGUIColor;
+    //private List<Type> m_UsedScriptList;
+    //private List<Type> m_UnusedScriptList;
 
     //Add menu named "Asset Hunter" to the window menu  
     [UnityEditor.MenuItem("Window/Asset Hunter _%h", priority = 1)]
@@ -147,6 +151,8 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
         m_window.Show();
 
         loadEditorResources();
+
+        m_window.m_BuildLogExists = AssetHunterHelper.HasBuildLogAvaliable();
 
         return m_window;
     }
@@ -216,7 +222,8 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
     void OnGUI()
     {
 
-        OnShowDefaultGUI();
+        OnShowDefaultHeader();
+        OnShowDefaultBody();
 
         if (m_BuildLogLoaded)
         {
@@ -225,15 +232,126 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             else if (m_WindowState == AssetHunterWindowState.BuildReport)
                 OnBuildReportUIUpdate();
         }
+
+        //No need for build to look at unused scripts
+        /*if (m_WindowState == AssetHunterWindowState.UnusedScripts)
+            OnUnusedScriptsUIUpdate();*/
     }
 
-    private void OnShowDefaultGUI()
+    private void OnShowDefaultHeader()
     {
-        EditorGUILayout.LabelField("Asset Hunter v1.3.5", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField("Asset Hunter v2.1.1", EditorStyles.boldLabel);
+        EditorGUILayout.BeginVertical();
+        EditorGUILayout.BeginHorizontal();
+
+        //BUTTON Settings
+        EditorGUILayout.Space();
+       // GUI.color = AssetHunterHelper.AH_BLUE;
+        if (GUILayout.Button(new GUIContent("Edit settings", m_UISettings), GUILayout.Width(btnMinWidth - 70), GUILayout.Height(20)))
+        {
+            EditorWindow.GetWindow<AssetHunterSettingsWindow>(true, "Asset Hunter Settings");
+        }
+
+        //BUTTON Open Log
+        EditorGUILayout.Space();
+        //GUI.color = AssetHunterHelper.AH_RED;    
+        if (GUILayout.Button("Open log", GUILayout.MinWidth(100)))
+        {
+            System.Diagnostics.Process.Start(AssetHunterHelper.GetLogFolderPath());
+        }
+
+        //BUTTON delete empty folders
+        EditorGUILayout.Space();
+        //GUI.color = AssetHunterHelper.AH_BLUE;
+        if (GUILayout.Button("Delete empty folders", GUILayout.MinWidth(120)))
+        {
+            if (EditorUtility.DisplayDialog("Delete empty folder", "Are you sure you want to delete all empty folders", "Yes", "No"))
+            {
+                string path = Application.dataPath;
+                int deleteCount = 0;
+                deleteEmptyDirectories(path, ref deleteCount);
+
+                Debug.LogWarning(deleteCount + " empty folders was deleted by Asset Hunter");
+            }
+        }
+
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+
+        GUILayout.Space(5);
+
+        EditorGUILayout.BeginHorizontal();
+
+        //BUTTON Settings
+        EditorGUILayout.Space();
+        if (GUILayout.Button("Scene overview", GUILayout.Width(btnMinWidth - 70), GUILayout.Height(20)))
+        {
+            EditorWindow.GetWindow<AssetHunterSceneOverview>(true, "Asset Hunter Scene Overview");
+        }
+
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+
+        EditorGUILayout.Space();
+
+        GUI.color = m_IntialGUIColor;
 
         //Show logo
         if (m_window && m_window.m_UIWideLogo)
             GUILayout.Label(m_window.m_UIWideLogo);
+
+        //Only show the foldout if we actually have any manually excluded folders or types
+        if (settings !=null && settings.HasExcludes())
+            bShowExcludeFoldout = EditorGUILayout.Foldout(bShowExcludeFoldout, "Show manual excludes");
+
+        EditorGUILayout.EndVertical();
+    }
+
+    private void OnShowDefaultBody()
+    {
+        EditorGUILayout.BeginVertical();
+
+        //Draw excluded types foldout
+        if (bShowExcludeFoldout)
+        {
+            GUILayout.Label("-------------------------------------------------------------------------");
+            if (settings.HasDirectoryExcludes())
+            {
+                GUI.color = AssetHunterHelper.AH_BLUE;
+                EditorGUI.indentLevel = 1;
+                EditorGUILayout.LabelField("Excluded Directories", EditorStyles.whiteBoldLabel);
+                GUI.color = m_IntialGUIColor;
+                EditorGUI.indentLevel = 2;
+                foreach (UnityEngine.Object obj in settings.m_DirectoryExcludes)
+                    EditorGUILayout.LabelField(AssetDatabase.GetAssetPath(obj), EditorStyles.miniLabel);
+            }
+            if (settings.HasTypeExcludes())
+            {
+                GUI.color = AssetHunterHelper.AH_BLUE;
+                EditorGUI.indentLevel = 1;
+                EditorGUILayout.LabelField("Excluded Types", EditorStyles.whiteBoldLabel);
+                GUI.color = m_IntialGUIColor;
+                EditorGUI.indentLevel = 2;
+                foreach (SerializableSystemType sType in settings.m_AssetTypeExcludes)
+                {
+                    EditorGUILayout.LabelField(sType.Name);
+                }
+            }
+            if (settings.HasSubStringExcludes())
+            {
+                GUI.color = AssetHunterHelper.AH_BLUE;
+                EditorGUI.indentLevel = 1;
+                EditorGUILayout.LabelField("Excluded Strings", EditorStyles.whiteBoldLabel);
+                GUI.color = m_IntialGUIColor;
+                EditorGUI.indentLevel = 2;
+                foreach (string substring in settings.m_AssetSubstringExcludes)
+                {
+                    EditorGUILayout.LabelField(substring);
+                }
+            }
+            GUILayout.Label("-------------------------------------------------------------------------");
+            GUILayout.Space(10);
+        }
 
         //If there is no valid build log
         if (!m_BuildLogExists)
@@ -244,113 +362,109 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             {
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Label(m_UIWarning);
-                GUILayout.Label("Go build your project in order for this tool to function...(Ctrl+Shift+B)", EditorStyles.boldLabel);
-                GUILayout.FlexibleSpace();
+                GUILayout.Label("Asset Hunter needs a recent build in order to work", EditorStyles.boldLabel);
                 EditorGUILayout.EndHorizontal();
+
+                GUILayout.Label("Create a build (Ctrl+Shift+B)");
+
+                //requires unity 5 to work
+                #if UNITY_5
+                if (GUILayout.Button("Open Build Settings"))
+                {
+                    EditorWindow.GetWindow(Type.GetType("UnityEditor.BuildPlayerWindow,UnityEditor"));
+                }
+                #endif
+                
+                GUILayout.FlexibleSpace();
+                return;
             }
         }
 
         string buildLogButtonText;
 
-        //Settings
-        EditorGUILayout.Space();
-        EditorGUILayout.BeginVertical();
-        if (GUILayout.Button(new GUIContent("Edit Settings", m_UISettings), GUILayout.Width(btnMinWidth - 70), GUILayout.Height(20)))
-        {
-            EditorWindow.GetWindow<AssetHunterSettingsWindow>(true, "Asset Hunter Settings");
-        }
-
-
-        EditorGUI.indentLevel = 0;
-
-        //Only show the foldout if we actually have any manually excluded folders or types
-        if (settings.HasExcludes())
-            bShowExcludeFoldout = EditorGUILayout.Foldout(bShowExcludeFoldout, "Show manual excludes");
-
-        if (bShowExcludeFoldout)
-        {
-            if (settings.HasDirectoryExcludes())
-            {
-                EditorGUI.indentLevel = 1;
-                EditorGUILayout.LabelField("Excluded Directories", EditorStyles.boldLabel);
-
-                EditorGUI.indentLevel = 2;
-                foreach (Object obj in settings.m_DirectoryExcludes)
-                    EditorGUILayout.LabelField(AssetDatabase.GetAssetPath(obj), EditorStyles.miniLabel);
-            }
-            if (settings.HasTypeExcludes())
-            {
-                EditorGUI.indentLevel = 1;
-                EditorGUILayout.LabelField("Excluded Types", EditorStyles.boldLabel);
-
-                EditorGUI.indentLevel = 2;
-                foreach (SerializableSystemType sType in settings.m_AssetTypeExcludes)
-                {
-                    EditorGUILayout.LabelField(sType.Name);
-                }
-            }
-        }
-
         EditorGUI.indentLevel = 0;
         EditorGUILayout.EndVertical();
 
-        GUILayout.Label("-------------------------------Build Log--------------------------------");
+        GUILayout.Label("-------------------------------Build Info--------------------------------");
 
         //If build log up to date
         if (!m_newBuildReady)
         {
             buildLogButtonText = m_BuildLogLoaded ? "Log updated (refresh)" : "Load Build Log (Required)";
-            GUI.color = m_BuildLogLoaded ? Color.green : Color.red;
+            GUI.color = m_BuildLogLoaded ? AssetHunterHelper.AH_GREEN : AssetHunterHelper.AH_RED;
         }
 
         //If build log outdated
         else
         {
             buildLogButtonText = "Log outdated(Refresh)";
-            GUI.color = Color.yellow;
+            GUI.color = AssetHunterHelper.AH_YELLOW1;
         }
 
-        EditorGUILayout.BeginHorizontal();
-
         //Load the Editor build log
-        if (GUILayout.Button(buildLogButtonText, GUILayout.MinWidth(btnMinWidth)))
+        if (GUILayout.Button(buildLogButtonText, GUILayout.Width(375)))
         {
             loadEditorLog();
             return;
         }
-        EditorGUILayout.Space();
-
-        GUI.color = Color.cyan;
-
-        if (GUILayout.Button("Open Log", GUILayout.MinWidth(btnMinWidth)))
-        {
-            System.Diagnostics.Process.Start(AssetHunterHelper.GetLogFolderPath());
-        }
-
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndHorizontal();
+        //GUILayout.FlexibleSpace();
         EditorGUILayout.Space();
 
         GUILayout.Label("------------------------------Select Mode------------------------------");
         EditorGUILayout.BeginHorizontal();
 
         //Choose window state
-        GUI.color = (m_WindowState == AssetHunterWindowState.UnusedAssets) ? Color.gray : m_IntialGUIColor;
+        GUI.color = (m_WindowState == AssetHunterWindowState.UnusedAssets) ? AssetHunterHelper.AH_GREY : m_IntialGUIColor;
         if (GUILayout.Button(AssetHunterWindowState.UnusedAssets.ToString(), GUILayout.MinWidth(btnMinWidth)))
         {
             changeState(AssetHunterWindowState.UnusedAssets);
         }
         EditorGUILayout.Space();
-        GUI.color = (m_WindowState == AssetHunterWindowState.BuildReport) ? Color.gray : m_IntialGUIColor;
+
+        GUI.color = (m_WindowState == AssetHunterWindowState.BuildReport) ? AssetHunterHelper.AH_GREY : m_IntialGUIColor;
         if (GUILayout.Button(AssetHunterWindowState.BuildReport.ToString(), GUILayout.MinWidth(btnMinWidth)))
         {
-            //AssetHunterHelper.GetAddedComponents();
+            //Shot buildreport
             changeState(AssetHunterWindowState.BuildReport);
         }
 
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Space();
+
+        #region scriptdetection
+        /*EditorGUILayout.BeginHorizontal();
+
+        GUI.color = AssetHunterHelper.AH_RED;
+        if (GUILayout.Button(AssetHunterWindowState.UnusedScripts.ToString() + " (WIP - USE WITH CONSIDERATION)", GUILayout.MinWidth(btnMinWidth * 2 + 14)))
+        {
+
+            GUI.color = m_IntialGUIColor;
+            //Get added scripts
+            //List<Type> scriptAssemblyTypes = AssetHunterHelper.GetScriptAssembly();
+
+            //Find all enabled scenes in buildsettings
+            EditorBuildSettingsScene[] activeScenes = EditorBuildSettings.scenes.Where(val => val.enabled == true).ToArray<EditorBuildSettingsScene>();
+
+
+            //All script dependencies for all enabled levels in buildsettings
+            m_UsedScriptList = AssetHunterHelper.GetScriptLevelDependencies(activeScenes);
+
+            //Find ALL scripts in scriptAssembly
+            //TODO ADD THIS TO ATTEMPT TO LOCATE UNUSED CODE
+            //m_UnusedScriptList = AssetHunterHelper.GetAddedComponents();
+            
+            //Remove "Used Scripts" from list
+            m_UnusedScriptList.RemoveAll(val => m_UsedScriptList.Contains(val));
+
+            changeState(AssetHunterWindowState.UnusedScripts);
+        }
+
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+        EditorGUILayout.Space();*/
+
+        #endregion
 
         //Reset GUI Color
         GUI.color = m_IntialGUIColor;
@@ -372,16 +486,16 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
 
     private void OnBuildReportUIUpdate()
     {
+        GUILayout.Label("Select UnusedAssets to view the project assets not used in last build");
         scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
         EditorGUILayout.BeginHorizontal();
 
         //Show all used types
         EditorGUILayout.BeginVertical();
         showTypesUI(m_usedTypeDict);
-        EditorGUILayout.EndVertical();
-
         //Show included assemblies
         showDependenciesUI();
+        EditorGUILayout.EndVertical();
 
         EditorGUILayout.EndHorizontal();
 
@@ -407,7 +521,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
 
         if (m_unusedTypeDict.Count >= 1)
         {
-            GUILayout.Label("Select UnusedAssets to view the project assets not used in last build");
+            GUILayout.Label("Select BuildReport to view the project assets included in the last build");
             showTypesUI(m_unusedTypeDict);
 
             if (m_TypeChangeDetected)
@@ -426,6 +540,51 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
         EditorGUILayout.EndVertical();
         EditorGUILayout.EndScrollView();
     }
+
+    #region scriptDetection
+
+    /*private void OnUnusedScriptsUIUpdate()
+    {
+        if (m_UsedScriptList == null || m_UsedScriptList.Count <= 0)
+            return;
+
+        scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+        EditorGUILayout.BeginVertical();
+
+        EditorGUILayout.LabelField("List of unused scripts", EditorStyles.boldLabel);
+        showUnusedScriptsUI();
+
+        EditorGUILayout.EndVertical();
+        EditorGUILayout.EndScrollView();
+    }*/
+
+    /*private void showUnusedScriptsUI()
+    {
+
+        //TODO
+        //HERE IS A WAY TO FIND ALL CLASSES, Used, and Unused
+        //http://answers.unity3d.com/questions/30382/editor-assembly.html
+
+        foreach (Type t in m_UnusedScriptList)
+        {
+            GUILayout.BeginHorizontal();
+            MonoScript script = null;
+
+            if (GUILayout.Button(t.ToString(), GUILayout.Width(btnMinWidth * 2 + 14)))
+            {
+                MonoScript[] scripts = (MonoScript[])Resources.FindObjectsOfTypeAll(typeof(MonoScript));
+                foreach (MonoScript m in scripts)
+                {
+                    if (m.GetClass() == t)
+                        script = m;
+                }
+                Selection.activeObject = script;
+            }
+            GUILayout.EndHorizontal();
+        }
+    }*/
+
+    #endregion
 
     private void showUnusedAssets()
     {
@@ -462,7 +621,8 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             {
                 m_assetMarkedForDeletion.Delete(m_unusedTypeDict);
                 //Delete potential empty folders
-                processDirectory(getSystemFolderPath(m_assetMarkedForDeletion.m_ParentPath));
+                int deleteCount = 0;
+                deleteEmptyDirectories(getSystemFolderPath(m_assetMarkedForDeletion.m_ParentPath), ref deleteCount);
                 m_assetMarkedForDeletion = null;
             }
             else
@@ -470,22 +630,54 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
         }
         else if (m_folderMarkedForDeletion != null)
         {
-            if (EditorUtility.DisplayDialog("Delete all child assets", "Are you sure you want to delete all " + m_folderMarkedForDeletion.GetAssetCountInChildren() + " child assets", "Yes", "No"))
-            {
-                List<AssetObjectInfo> objectsToDelete = new List<AssetObjectInfo>();
-                getObjectsMarkedForDeletion(m_folderMarkedForDeletion, ref objectsToDelete);
+          int dialogChoice = EditorUtility.DisplayDialogComplex(
+                "Clean all assets in folder",
+                "You can delete all assets below this folder, or you can choose to make a backup first. That will create a unitypackage with all your deleted assets, but it will be slow",
+                "Delete all",
+                "Backup and delete (Slow!)",
+                "Cancel");
 
-                deleteSelected(objectsToDelete);
-                //Delete potential empty folders
-                processDirectory(getSystemFolderPath(m_folderMarkedForDeletion.DirectoryName));
-                m_folderMarkedForDeletion = null;
-                refreshUnusedAssets();
-            }
-            else
+            switch (dialogChoice)
             {
-                m_folderMarkedForDeletion = null;
+                //Normal delete
+                case 0:
+                    deleteAllInFolder(m_folderMarkedForDeletion, false);
+                    break;
+                //Delete with backup
+                case 1:
+                    deleteAllInFolder(m_folderMarkedForDeletion, true);
+                    break;
+                //Cancel
+                case 2:
+                    m_folderMarkedForDeletion = null;
+                    break;
+                default:
+                    Debug.LogError("Unrecognized option.");
+                    break;
             }
         }
+    }
+
+    //Delete all folder recursively
+    private void deleteAllInFolder(ProjectFolderInfo folder, bool shouldBackup)
+    {
+        m_folderMarkedForDeletion = null;
+
+        List<AssetObjectInfo> objectsToDelete = new List<AssetObjectInfo>();
+        getObjectsMarkedForDeletion(folder, ref objectsToDelete);
+
+        //Create backup
+        if(shouldBackup)
+            createBackup(objectsToDelete, folder.GetTopFolderName());
+
+        //Delete assets
+        deleteSelected(objectsToDelete);
+
+        //Delete potential empty folders
+        int deleteCount = 0;
+        deleteEmptyDirectories(getSystemFolderPath(folder.DirectoryName), ref deleteCount);
+
+        refreshUnusedAssets();
     }
 
     private string getSystemFolderPath(string assetPath)
@@ -493,19 +685,29 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
         return Application.dataPath.Substring(0, Application.dataPath.IndexOf("/Assets") + 1) + assetPath;
     }
 
-    private static void processDirectory(string startLocation)
+    private static bool deleteEmptyDirectories(string startLocation, ref int deleteCount)
     {
         foreach (var directory in System.IO.Directory.GetDirectories(startLocation, "*.*", System.IO.SearchOption.TopDirectoryOnly))
         {
-            processDirectory(directory);
+            if (deleteEmptyDirectories(directory, ref deleteCount))
+                deleteCount++;
         }
 
-        if (System.IO.Directory.GetFiles(startLocation).Where(path => !path.EndsWith(".meta")).Count() == 0 &&
-        System.IO.Directory.GetDirectories(startLocation).Length == 0)
+        //Exclude file extensions that can be deleted
+        if (System.IO.Directory.GetFiles(startLocation).Where(path => !path.EndsWith(".meta") 
+                    && (!path.ToLowerInvariant().EndsWith("thumbs.db"))
+                    && (!path.ToLowerInvariant().EndsWith(".orig"))
+                    && (!path.ToLowerInvariant().Contains(@".ds_store"))
+                    && (!path.ToLowerInvariant().Contains(@".workspace.mel"))
+                    && (!path.ToLowerInvariant().Contains(@".mayaswatches"))).Count() == 0
+                    && System.IO.Directory.GetDirectories(startLocation).Length == 0)
         {
             FileUtil.DeleteFileOrDirectory(startLocation);
             AssetDatabase.Refresh();
+            return true;
         }
+
+        return false;
     }
 
     private void deleteSelected(List<AssetObjectInfo> objectsToDelete)
@@ -516,6 +718,48 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             objectsToDelete[i].Delete(m_unusedTypeDict);
         }
         UnityEditor.EditorUtility.ClearProgressBar();
+    }
+
+    private void createBackup(List<AssetObjectInfo> objectsToDelete, string mainDirectoryName)
+    {
+
+        //Re-implement this if user should be allowed to select folder
+        /*string[] backupFiles = new string[objectsToDelete.Count];
+        for (int i = 0; i < objectsToDelete.Count; i++)
+        {
+            backupFiles[i] = objectsToDelete[i].m_Path;
+        }
+        string backupFileName = "Backup_" + DateTime.Now.ToString("yyyy_MMdd_HHmmss") + ".unitypackage";
+
+        string tmpNewFolder = Application.dataPath + "\\..\\AssetHunterBackupXXX";
+        System.IO.Directory.CreateDirectory(tmpNewFolder);
+
+        string realNewFolder = EditorUtility.SaveFolderPanel("Save backup", tmpNewFolder, "");
+        if (realNewFolder.Length != 0)
+        {
+            UnityEditor.AssetDatabase.ExportPackage(backupFiles, realNewFolder+ System.IO.Path.DirectorySeparatorChar + backupFileName, ExportPackageOptions.Default);
+        }
+        EditorUtility.RevealInFinder(tmpNewFolder);*/
+
+        UnityEditor.EditorUtility.DisplayProgressBar("Creating backup unitypackage (This might be quite slow)", "Here's a static progress bar to look at (it wont move, be patient)", .3f);
+
+        string[] backupFiles = new string[objectsToDelete.Count];
+        for (int i = 0; i < objectsToDelete.Count; i++)
+        {
+            backupFiles[i] = objectsToDelete[i].m_Path;
+        }
+
+        string backupFileName = mainDirectoryName + "_" + DateTime.Now.ToString("yyyy_MM_dd_HH_mm_ss") + ".unitypackage";
+        string newFolderName = "AssetHunterBackup";
+        string newDir = Application.dataPath + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + newFolderName;
+
+        System.IO.Directory.CreateDirectory(newDir);
+
+        UnityEditor.AssetDatabase.ExportPackage(backupFiles, newFolderName + System.IO.Path.DirectorySeparatorChar + backupFileName, ExportPackageOptions.Default);
+
+        UnityEditor.EditorUtility.ClearProgressBar();
+
+        EditorUtility.RevealInFinder(newDir + System.IO.Path.DirectorySeparatorChar);
     }
 
     private void getObjectsMarkedForDeletion(ProjectFolderInfo aFInfo, ref List<AssetObjectInfo> objectsToDelete)
@@ -544,6 +788,20 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
         if (m_showTypesFoldout)
         {
             EditorGUI.indentLevel = 1;
+
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("Select all", GUILayout.ExpandWidth(false)))
+                foreach (var key in typeList.Keys.ToList())
+                    typeList[key] = true;
+
+            if (GUILayout.Button("Deselect all", GUILayout.ExpandWidth(false)))
+                foreach (var key in typeList.Keys.ToList())
+                    typeList[key] = false;
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+
+            
             foreach (var key in typeList.Keys.ToList())
             {
                 bool lastVal = typeList[key];
@@ -553,6 +811,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             }
         }
         EditorGUILayout.Space();
+        EditorGUI.indentLevel = 0;
     }
 
     private void showBuildAssetInfoUI()
@@ -598,7 +857,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
                     {
                         List<string> scenes = m_assetSceneDependencies[asset.Path];
 
-                        UnityEngine.Object[] selectedObjects = new Object[scenes.Count];
+                        UnityEngine.Object[] selectedObjects = new UnityEngine.Object[scenes.Count];
 
                         for (int j = 0; j < scenes.Count; j++)
                         {
@@ -634,10 +893,10 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
                         asset.FoldOut = EditorGUILayout.Foldout(asset.FoldOut, "View scenes with dependency");
                         if (asset.FoldOut)
                         {
-                            foreach (Object obj in asset.GetSceneDependencies())
+                            foreach (UnityEngine.Object obj in asset.GetSceneDependencies())
                             {
                                 if (obj != null)
-                                    EditorGUILayout.ObjectField(obj, typeof(Object), false);
+                                    EditorGUILayout.ObjectField(obj, typeof(UnityEngine.Object), false);
                             }
                         }
                     }
@@ -645,7 +904,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
                     else
                     {
                         Color initialColor = GUI.color;
-                        GUI.color = Color.red;
+                        GUI.color = AssetHunterHelper.AH_RED;
                         EditorGUILayout.LabelField("Asset not referenced in any scene, most likely a part of the \"resources\" foldes", EditorStyles.whiteLabel);
                         GUI.color = initialColor;
                     }
@@ -660,18 +919,25 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
 
     private void showDependenciesUI()
     {
-        EditorGUILayout.BeginVertical();
-        EditorGUI.indentLevel = 0;
+        m_showAssemblyFoldout = EditorGUILayout.Foldout(m_showAssemblyFoldout, "Show Assemblies");
 
-        EditorGUILayout.LabelField("Assemblies included in build", EditorStyles.boldLabel);
-        EditorGUI.indentLevel = 1;
-        for (int i = 0; i < m_BuildLog.IncludedDependencies.Count; i++)
+        if (m_showAssemblyFoldout)
         {
-            EditorGUILayout.LabelField(m_BuildLog.IncludedDependencies[i]);
-        }
 
-        GUILayout.FlexibleSpace();
-        EditorGUILayout.EndVertical();
+            EditorGUILayout.BeginVertical();
+            EditorGUI.indentLevel = 0;
+
+            EditorGUILayout.LabelField("Assemblies included in build", EditorStyles.boldLabel);
+            EditorGUI.indentLevel = 1;
+            for (int i = 0; i < m_BuildLog.IncludedDependencies.Count; i++)
+            {
+                EditorGUILayout.LabelField(m_BuildLog.IncludedDependencies[i]);
+            }
+
+            GUILayout.Space(20);
+            //GUILayout.FlexibleSpace();
+            EditorGUILayout.EndVertical();
+        }
     }
 
     private void drawAssetFolderInfoRecursively(ProjectFolderInfo assetFolder, int indentLevel)
@@ -686,7 +952,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             EditorGUILayout.BeginHorizontal();
 
             Color initialColor = GUI.color;
-            GUI.color = Color.yellow;
+            GUI.color = AssetHunterHelper.AH_RED;
             float buttonSizeSelect = 60;
             float buttonSizeDelete = 100;
 
@@ -704,7 +970,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             style.fontStyle = FontStyle.Bold;
 
             //Show foldout
-            assetFolder.FoldOut = EditorGUILayout.Foldout(assetFolder.FoldOut, assetFolder.DirectoryName + " (" + assetCount + ")", style);
+            assetFolder.FoldOut = EditorGUILayout.Foldout(assetFolder.FoldOut, assetFolder.DirectoryName + " (" + assetFolder.FileSizeString + "/" + assetFolder.FileSizeAccumulatedString + ")", style);
 
             //Reset style
             style.fontStyle = previousStyle;
@@ -733,7 +999,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
                         Selection.activeObject = AssetDatabase.LoadAssetAtPath(aInfo.m_Path, aInfo.m_Type.SystemType);
                     }
 
-                    EditorGUILayout.LabelField(aInfo.m_Name, GUILayout.MaxWidth(600));
+                    EditorGUILayout.LabelField(aInfo.m_Name + " (" + aInfo.m_FileSizeString + ")", GUILayout.MaxWidth(600));
                     EditorGUILayout.EndHorizontal();
                 }
 
@@ -762,7 +1028,7 @@ public class AssetHunterMainWindow : EditorWindow, ISerializationCallbackReceive
             m_BuildLogLoaded = true;
         }
 
-        List<string> usedPrefabsInScenes = AssetReader.GetPrefabsFromSceneFiles(AssetReader.GetEnabledScenesInBuild(), out m_assetSceneDependencies);
+        List<string> usedPrefabsInScenes = AssetReader.GetPrefabsFromSceneFiles(AssetHunterHelper.GetEnabledSceneNamesInBuild(), out m_assetSceneDependencies);
 
         m_BuildLog.AddPrefabs(usedPrefabsInScenes);
         m_BuildLog.AddPlatformSpecificAssets();

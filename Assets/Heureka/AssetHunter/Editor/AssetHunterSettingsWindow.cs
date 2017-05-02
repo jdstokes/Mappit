@@ -14,6 +14,8 @@ public class AssetHunterSettingsWindow : EditorWindow
     private float btnMinWidthLarge = 200;
     private float btnMinWidthSmall = 80;
 
+    private string m_excludeSubstringInput = string.Empty;
+
     public static AssetHunterSettingsWindow Instance
     {
         get
@@ -63,7 +65,15 @@ public class AssetHunterSettingsWindow : EditorWindow
         AssetHunterSettingsWindow.Instance.Repaint();
 
         EditorGUILayout.Separator();
-        GUILayout.Label("This is the settingswindow for Asset Hunter! " + System.Environment.NewLine + "-Choose folders and types to exclude when scanning the project");
+        GUILayout.Label("This is the settingswindow for Asset Hunter! " + System.Environment.NewLine + "-Choose folders, types or filenames to exclude when scanning the project", EditorStyles.boldLabel);
+        GUILayout.Label("NB: If your project window is in \"Two column layout\" you need to select folders in the right hand side of that window", EditorStyles.miniLabel);
+
+        GUILayout.Label("----------------------------------------------------------------------------", EditorStyles.boldLabel);
+        //Force memorycleanup
+        settings.m_MemoryCleanupActive = GUILayout.Toggle(settings.m_MemoryCleanupActive, "Force memory cleanup");
+        GUILayout.Label("Enable this if you experience memory crashes (Much slower)", EditorStyles.miniLabel);
+        GUILayout.Label("----------------------------------------------------------------------------", EditorStyles.boldLabel);
+
         EditorGUILayout.Separator();
         EditorGUILayout.Separator();
 
@@ -75,7 +85,7 @@ public class AssetHunterSettingsWindow : EditorWindow
         //Select folder to exclude
         EditorGUILayout.BeginHorizontal();
 
-        GUI.color = (validSelection ? Color.green : Color.grey);
+        GUI.color = (validSelection ? AssetHunterHelper.AH_BLUE : AssetHunterHelper.AH_GREY);
 
         if (GUILayout.Button(validSelection ? "Exclude selected folder" : "No valid folder selected", GUILayout.Width(btnMinWidthLarge)))
         {
@@ -105,7 +115,7 @@ public class AssetHunterSettingsWindow : EditorWindow
         //Do we have a valid asset selected
         validSelection = (selectedType != null && !bFolderSelected && settings.ValidateType(selectedType));
 
-        GUI.color = (validSelection ? Color.green : Color.grey);
+        GUI.color = (validSelection ? AssetHunterHelper.AH_BLUE : AssetHunterHelper.AH_GREY);
 
         if (GUILayout.Button(validSelection ? "Exclude selected type" : "No valid type selected", GUILayout.Width(btnMinWidthLarge)))
         {
@@ -123,6 +133,36 @@ public class AssetHunterSettingsWindow : EditorWindow
         GUILayout.FlexibleSpace();
         EditorGUILayout.EndHorizontal();
         EditorGUILayout.Separator();
+
+        //Exluded filename substrings
+        EditorGUILayout.BeginHorizontal();
+
+        validSelection = !string.IsNullOrEmpty(m_excludeSubstringInput) && settings.ValidateSubstring(m_excludeSubstringInput);
+        GUI.color = (validSelection ? AssetHunterHelper.AH_BLUE : AssetHunterHelper.AH_GREY);
+
+        bool bHasHitEnter = false;
+
+        Event e = Event.current;
+        if (e.keyCode == KeyCode.Return) bHasHitEnter = true;
+
+        if (bHasHitEnter || GUILayout.Button(validSelection ? "Exclude substring": "No valid search string", GUILayout.Width(btnMinWidthLarge)))
+        {
+            if (validSelection)
+            {
+                settings.ExcludeSubstring(m_excludeSubstringInput);
+                m_excludeSubstringInput = string.Empty;
+            }
+        }
+
+        GUI.color = m_IntialGUIColor;
+        m_excludeSubstringInput = GUILayout.TextField(m_excludeSubstringInput);
+
+        //GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+        if (validSelection)
+            GUILayout.Label(string.Format("Will exclude any asset with \"{0}\" in its path/name (might make asset hunter perform slower)", m_excludeSubstringInput));
+
+        EditorGUILayout.Separator();
         EditorGUILayout.Separator();
 
         GUILayout.Label("---------------------------Excluded Folders------------------------------", EditorStyles.boldLabel);
@@ -131,7 +171,7 @@ public class AssetHunterSettingsWindow : EditorWindow
             for (int i = settings.m_DirectoryExcludes.Count - 1; i >= 0; i--)
             {
                 EditorGUILayout.BeginHorizontal();
-                GUI.color = Color.red;
+                GUI.color = AssetHunterHelper.AH_RED;
 
                 if (GUILayout.Button("Delete", GUILayout.Width(btnMinWidthSmall)))
                 {
@@ -154,7 +194,7 @@ public class AssetHunterSettingsWindow : EditorWindow
             for (int i = settings.m_AssetTypeExcludes.Count - 1; i >= 0; i--)
             {
                 EditorGUILayout.BeginHorizontal();
-                GUI.color = Color.red;
+                GUI.color = AssetHunterHelper.AH_RED;
                 if (GUILayout.Button("Delete", GUILayout.Width(btnMinWidthSmall)))
                 {
                     settings.RemoveTypeAtIndex(i);
@@ -167,6 +207,28 @@ public class AssetHunterSettingsWindow : EditorWindow
         else
         {
             EditorGUILayout.LabelField("No types are currently excluded");
+        }
+
+        EditorGUILayout.Separator();
+
+        GUILayout.Label("---------------------------Excluded Substrings---------------------------", EditorStyles.boldLabel);
+        if (settings.m_AssetSubstringExcludes.Count >= 1)
+            for (int i = settings.m_AssetSubstringExcludes.Count - 1; i >= 0; i--)
+            {
+                EditorGUILayout.BeginHorizontal();
+                GUI.color = AssetHunterHelper.AH_RED;
+                if (GUILayout.Button("Delete", GUILayout.Width(btnMinWidthSmall)))
+                {
+                    settings.RemoveSubstringAtIndex(i);
+                    continue;
+                }
+                GUI.color = m_IntialGUIColor;
+                GUILayout.Label(string.Format("\"{0}\"", settings.m_AssetSubstringExcludes[i]));
+                EditorGUILayout.EndHorizontal();
+            }
+        else
+        {
+            EditorGUILayout.LabelField("No substrings are currently excluded");
         }
 
         EditorGUILayout.EndVertical();
