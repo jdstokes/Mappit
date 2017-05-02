@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{5B641340-80D5-DCED-7937-DF2CF34C42DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_2;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_STANDALONE_OSX;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_GAMECENTER;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_VIDEO;ENABLE_VR;ENABLE_CLUSTERINPUT;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_OSX;UNITY_TEAM_LICENSE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>/Applications/Unity5.5/Unity.app/Contents/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>/Applications/Unity5.5/Unity.app/Contents/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Entities\Experiments\Experiment1\Experiment1.cs" />
+     <Compile Include="Assets\Entities\GUIs\GUI pointing task\gui_pt.cs" />
+     <Compile Include="Assets\Entities\Menu\Scripts\EventSystemChecker.cs" />
+     <Compile Include="Assets\Entities\Menu\Scripts\MenuSceneLoader.cs" />
+     <Compile Include="Assets\Entities\Menu\Scripts\PauseMenu.cs" />
+     <Compile Include="Assets\Entities\Menu\Scripts\ReturnToMainMenu.cs" />
+     <Compile Include="Assets\Entities\Menu\Scripts\SceneAndURLLoader.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\ExampleClass.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\GameControl.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\GetMapScore.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\InitializeUI.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\InstructionsOff.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\MapDraw.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\NullifyTransform.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\PlayerPrefsX.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\Shops.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\Store.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\VRTransform.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\cameraMove.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\coro.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\fadeText.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\flipStore.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\id.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\mapLearn.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\mapScore.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\moveStore.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\not used\CreateStoreUIs.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\not used\createHolders.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\not used\moveStore_old.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\not used\shop_old.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\score.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\storeName.cs" />
+     <Compile Include="Assets\Entities\Tasks\pointingtask\CompassControl.cs" />
+     <Compile Include="Assets\Entities\Tasks\pointingtask\JRD.cs" />
+     <Compile Include="Assets\Entities\Tasks\pointingtask\JRDquestion.cs" />
+     <Compile Include="Assets\Entities\Tasks\pointingtask\LoadJRDquestions.cs" />
+     <Compile Include="Assets\Entities\Tasks\pointingtask\SaveLoad.cs" />
+     <Compile Include="Assets\Entities\Tasks\pointingtask\Task.cs" />
+     <Compile Include="Assets\Heureka\HeurekaShared\Extensions.cs" />
+     <Compile Include="Assets\Heureka\HeurekaShared\Singleton.cs" />
+     <Compile Include="Assets\Landmarks\Unknown Assets\primitives.v1\primitives_testscene\_resources\failscript.cs" />
+     <Compile Include="Assets\Landmarks\unprocessed\WaterSources\Water.cs" />
+     <Compile Include="Assets\LevelManager.cs" />
+     <Compile Include="Assets\mpLevelManager.cs" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Depth.shader" />
+     <None Include="Assets\Heureka\AssetHunter\Editor\Settings\ScriptableObjectsFolder.txt" />
+     <None Include="Assets\textFiles\s503.txt" />
+     <None Include="Assets\textFiles\s508.txt" />
+     <None Include="Assets\textFiles\s501.txt" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
+     <None Include="Assets\Shaders\Resources\Tree.cginc" />
+     <None Include="Assets\Shaders\Resources\FastTreeCreatorLeaves.shader" />
+     <None Include="Assets\textFiles\s509.txt" />
+     <None Include="Assets\textFiles\test.txt" />
+     <None Include="Assets\Shaders\Resources\TreeVertexLit.cginc" />
+     <None Include="Assets\Heureka\AssetHunter\Readme.txt" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
+     <None Include="Assets\textFiles\s507.txt" />
+     <None Include="Assets\textFiles\s505.txt" />
+     <None Include="Assets\textFiles\s510.txt" />
+     <None Include="Assets\Entities\Tasks\pointingtask\list_bigCityCyberith_s501.txt" />
+     <None Include="Assets\textFiles\s502.txt" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
+     <None Include="Assets\textFiles\s506.txt" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored (HardClip).shader" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored Overlay.shader" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
+     <None Include="Assets\Shaders\Resources\FastTreeCreatorLeavesOptimized.shader" />
+     <None Include="Assets\textFiles\s504.txt" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
+     <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
+     <None Include="Assets\textFiles\s500.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.PlaymodeTestsRunner">
+ <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.VR">
+ <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>

@@ -1,0 +1,40 @@
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/jdstokes/repos/Mappit copy/obj/Debug/Assembly-CSharp.dll
+/Users/jdstokes/repos/Mappit copy/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/UnityEngine.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/UnityEditor.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/ProBuilderCore-Unity5.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/ProBuilderMeshOps-Unity5.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/KDTree.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Mono.Cecil.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Unity.DataContract.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/jdstokes/repos/Mappit copy/Temp/bin/Debug/Mono.Cecil.Mdb.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/jdstokes/repos/mappit/obj/Debug/Assembly-CSharp.dll
+/Users/jdstokes/repos/mappit/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/UnityEngine.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/UnityEditor.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/ProBuilderCore-Unity5.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/ProBuilderMeshOps-Unity5.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/KDTree.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Mono.Cecil.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Unity.DataContract.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/jdstokes/repos/mappit/Temp/bin/Debug/Mono.Cecil.Mdb.dll
