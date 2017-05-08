@@ -1,5 +1,3 @@
-Toy Store, Bike Shop, Barber
-
 Imagine standing in the Pet Store, facing the Bike Shop; point to the Toy Store.
 
 Imagine standing in the Florist, facing the Bike Shop; point to the Pet Store.

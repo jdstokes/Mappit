@@ -7,17 +7,17 @@ using UnityEngine.SceneManagement;
 public class Experiment1 : MonoBehaviour {
 
 //	static Experiment1 instance = null;
-
 	public List<string> tasks = new List<string>();
-	public int numRuns = 2;
+	public int numRuns = 6;
 	static public int curModule = 0;
 	public string guiScene;
-	public string endScene;
 	public bool gui = true;
 	private static Experiment1 instance;
+
 	static public List<string> blockList = new List<string>();
 	static public List<string> runList = new List<string>();
-
+	static public int jrd_count = 0;
+	static public int round_count;
 
 	void Awake() {
 
@@ -31,16 +31,11 @@ public class Experiment1 : MonoBehaviour {
 			PlayerPrefs.SetString("playerID","test");
 		
 		}
-
-
 	}
-
 
 
 	// Use this for initialization
 	void Start () {
-		print(PlayerPrefs.GetFloat("playerID"));
-
   		   if(gui){
 			SceneManager.LoadScene(guiScene);
 		}
@@ -48,31 +43,45 @@ public class Experiment1 : MonoBehaviour {
 	}
 
 
+	static public void StartTask()
+	{
+	
+		SceneManager.LoadScene(blockList[curModule]);
+		print("loading module " +curModule + " " + blockList[curModule]);
+	
+	}
 
-	public void LoadLevel(string name){
+	static public void LoadLevel(string name){
 		Debug.Log ("New Level load: " + name);
-		Application.LoadLevel (name);
+		SceneManager.LoadScene(name);
 		print("load level" + name);
 	}
 
-	public void QuitRequest(){
+	static public void QuitRequest(){
 		Debug.Log ("Quit requested");
 		Application.Quit ();
 	}
 
-	public void LoadNextModule(){
+	static public void LoadNextModule(){
 
 		if( !(curModule == blockList.Count -1)){
+		round_count = 0;
+		curModule ++;
 		SceneManager.LoadScene(blockList[curModule]);
 		print("loading module " +curModule + " " + blockList[curModule]);
-		curModule ++;
 		}
 		else{
 
-			LoadLevel(endScene);
+			LoadLevel("endScene");
 
 		}
 	}
+
+	public void ReloadCurrentScene(){
+		Scene scene = SceneManager.GetActiveScene();
+		SceneManager.LoadScene(scene.name);
+	}
+
 
 
 	void BuildBlockList(){

@@ -9,9 +9,6 @@ public class mapLearn : MonoBehaviour {
 		shops = GameObject.Find ("ShopsTrue");
 		GetStoreCoordinates();
 
-		//Advanced roundNum by 1
-		GameControl.roundNum ++;
-
 	}
 
 

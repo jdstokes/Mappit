@@ -18,8 +18,7 @@ public class GameControl : MonoBehaviour {
 	public static GetMapScore mapScore;
 	public static float thresh = 8;
 	public static string subjectID;
-	public static int roundNum = 0;
-	public static int maxRounds = 3;
+	public static int maxRounds = 2;
 
 	void Awake () {
 		if(control==null)
@@ -31,18 +30,25 @@ public class GameControl : MonoBehaviour {
 		{
 			Destroy(gameObject);
 		}
+
+	}
+
+	void Start(){
+
+		
+
 	}
 
 
-public static float GetScore(){
+	public static float GetScore(){
 
 		mapScore = new GetMapScore(stores_all);
 
 		return mapScore.scoreTotal;
 
-}
+	}
 
-public  void GetID(){
+	public  void GetID(){
 
 		GameObject inputFieldGo = GameObject.Find("InputField_ID");
 		InputField inputFieldCo = inputFieldGo.GetComponent<InputField>();
@@ -52,19 +58,23 @@ public  void GetID(){
 	}
 
 
+	public void NextModule(){
+		Experiment1.LoadNextModule();
+	}
+
+
 	public void ReloadCurrentScene(){
 		Scene scene = SceneManager.GetActiveScene();
 		SceneManager.LoadScene(scene.name);
 	}
 
 
-	public void LoadNextScene(){
-		Scene scene = SceneManager.GetActiveScene();
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	public void QuitRequest(){
+		Debug.Log ("Quit requested");
+		Application.Quit ();
 	}
 
 
-   public void QuitExperiment(){
-		Application.Quit();
-	}
 }
+
+

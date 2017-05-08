@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{D827676A-2A5D-2215-187A-79830780A570}</ProjectGuid>
+    <ProjectGuid>{E693204B-916E-5889-169C-42D10D52AE5F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -89,7 +89,7 @@
      <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
      <None Include="Assets\textFiles\s500.txt" />
  <Reference Include="Assembly-UnityScript">
- <HintPath>/Users/jdstokes/repos/Unity/mappit_test/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
+ <HintPath>/Users/jdstokes/repos/Unity/mappit/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity5.5/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -148,7 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{65BC6E15-4427-2AF0-8688-AB8688B4987C}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
+      <Project>{5B641340-80D5-DCED-7937-DF2CF34C42DF}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

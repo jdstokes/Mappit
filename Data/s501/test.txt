@@ -1,0 +1,44 @@
+1	Imagine standing in the Toy Store, facing the Bike Shop; point to the Barber.	(0.5, 0.5, 0.5, -0.5)	
+
+2	Imagine standing in the Pet Store, facing the Bike Shop; point to the Toy Store.	(0.5, 0.5, 0.5, -0.5)	
+
+3	Imagine standing in the Florist, facing the Bike Shop; point to the Pet Store.	(0.5, 0.5, 0.5, -0.5)	
+
+4	Imagine standing in the Pet Store, facing the Barber; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	
+
+5	Imagine standing in the Pet Store, facing the Florist; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	
+
+6	Imagine standing in the Florist, facing the Toy Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	
+
+7	Imagine standing in the Pet Store, facing the Bike Shop; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	
+
+8	Imagine standing in the Florist, facing the Dentist; point to the Pet Store.	(0.5, 0.5, 0.5, -0.5)	
+
+9	Imagine standing in the Bike Shop, facing the Book Store; point to the Barb er.	(0.5, 0.5, 0.5, -0.5)	
+
+10	Imagine standing in the Florist, facing the Bike Shop; point to the Barb er.	(0.5, 0.5, 0.5, -0.5)	
+
+11	Imagine standing in the Florist, facing the Barber; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	
+
+12	Imagine standing in the Toy Store, facing the Pet Store; point to the Bike Shop.	(0.5, 0.5, 0.5, -0.5)	
+
+13	Imagine standing in the Pet Store, facing the Florist; point to the Bike Shop.	(0.5, 0.5, 0.5, -0.5)	
+
+14	Imagine standing in the Bike Shop, facing the Pet Store; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	
+
+15	Imagine standing in the Florist, facing the Dentist; point to the Toy Store.	(0.5, 0.5, 0.5, -0.5)	
+
+16	Imagine standing in the Dentist, facing the Book Store; point to the Barber.	(0.5, 0.5, 0.5, -0.5)	
+
+17	Imagine standing in the Dentist, facing the Barber; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	
+
+18	Imagine standing in the Florist, facing the Barber; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	
+
+19	Imagine standing in the Dentist, facing the Book Store; point to the Bike Shop.	(0.5, 0.5, 0.5, -0.5)	
+
+20	Imagine standing in the Book Store, facing the Bike Shop; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	
+
+21	Imagine standing in the Bike Shop, facing the Toy Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	
+
+22	Imagine standing in the Pet Store, facing the Florist; point to the Barber.	(0.5, 0.5, 0.5, -0.5)	
+

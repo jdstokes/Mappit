@@ -90,4 +90,10 @@ public void CheckID(){
 	}
 
 
+	public void StartTask(){
+		Experiment1.StartTask();
+
+	}
+
+
 }

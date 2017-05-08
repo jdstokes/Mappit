@@ -15,11 +15,13 @@ public class mapScore : MonoBehaviour {
 		if(GameControl.GetScore() >= GameControl.thresh){
 			winUI.SetActive(true);
 		}
-		else if(GameControl.roundNum == GameControl.maxRounds){
+		else if(Experiment1.round_count == GameControl.maxRounds - 1){
 			winUI.SetActive(true);
 		}
 		else
-		{
+		{   
+			Experiment1.round_count ++;
+			print("Round: " + Experiment1.round_count);
 			loseUI.SetActive(true);
 
 		}

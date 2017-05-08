@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{65BC6E15-4427-2AF0-8688-AB8688B4987C}</ProjectGuid>
+    <ProjectGuid>{5B641340-80D5-DCED-7937-DF2CF34C42DF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -78,20 +78,14 @@
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\not used\shop_old.cs" />
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\score.cs" />
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\storeName.cs" />
-     <Compile Include="Assets\Entities\Tasks\pointingtask\CompassControl.cs" />
-     <Compile Include="Assets\Entities\Tasks\pointingtask\JRD.cs" />
-     <Compile Include="Assets\Entities\Tasks\pointingtask\JRDquestion.cs" />
-     <Compile Include="Assets\Entities\Tasks\pointingtask\LoadJRDquestions.cs" />
-     <Compile Include="Assets\Entities\Tasks\pointingtask\SaveLoad.cs" />
-     <Compile Include="Assets\Entities\Tasks\pointingtask\Task.cs" />
-     <Compile Include="Assets\Heureka\HeurekaShared\Extensions.cs" />
-     <Compile Include="Assets\Heureka\HeurekaShared\Singleton.cs" />
+     <Compile Include="Assets\Entities\Tasks\PointingTask\GameControl_pt.cs" />
+     <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\CompassControl.cs" />
+     <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\JRD.cs" />
+     <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\LoadJRDquestions.cs" />
+     <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\PointingTask.cs" />
      <Compile Include="Assets\Landmarks\Unknown Assets\primitives.v1\primitives_testscene\_resources\failscript.cs" />
      <Compile Include="Assets\Landmarks\unprocessed\WaterSources\Water.cs" />
-     <Compile Include="Assets\LevelManager.cs" />
-     <Compile Include="Assets\mpLevelManager.cs" />
      <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Depth.shader" />
-     <None Include="Assets\Heureka\AssetHunter\Editor\Settings\ScriptableObjectsFolder.txt" />
      <None Include="Assets\textFiles\s503.txt" />
      <None Include="Assets\textFiles\s508.txt" />
      <None Include="Assets\textFiles\s501.txt" />
@@ -101,12 +95,11 @@
      <None Include="Assets\textFiles\s509.txt" />
      <None Include="Assets\textFiles\test.txt" />
      <None Include="Assets\Shaders\Resources\TreeVertexLit.cginc" />
-     <None Include="Assets\Heureka\AssetHunter\Readme.txt" />
      <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
      <None Include="Assets\textFiles\s507.txt" />
      <None Include="Assets\textFiles\s505.txt" />
      <None Include="Assets\textFiles\s510.txt" />
-     <None Include="Assets\Entities\Tasks\pointingtask\list_bigCityCyberith_s501.txt" />
+     <None Include="Assets\Entities\Tasks\PointingTask\Docs\list_bigCityCyberith_s501.txt" />
      <None Include="Assets\textFiles\s502.txt" />
      <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Unlit - Transparent Colored.shader" />
      <None Include="Assets\textFiles\s506.txt" />

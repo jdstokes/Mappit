@@ -1,8 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../Dropbox/Landmarks Heather Official/Assets/Landmarks/scripts/Experiment.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/mpLevelManager.cs">
     <Files>
-      <File FileName="../../Dropbox/Landmarks Heather Official/Assets/Landmarks/scripts/Experiment.cs" Line="76" Column="1" />
+      <File FileName="Assets/Entities/Experiments/Experiment1/Experiment1.cs" Line="50" Column="1" />
+      <File FileName="Assets/Entities/Tasks/Mappit/scripts/mapLearn.cs" Line="12" Column="15" />
+      <File FileName="Assets/Entities/Tasks/Mappit/scripts/cameraMove.cs" Line="1" Column="1" />
+      <File FileName="Assets/Entities/Tasks/Mappit/scripts/mapScore.cs" Line="10" Column="1" />
+      <File FileName="Assets/mpLevelManager.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

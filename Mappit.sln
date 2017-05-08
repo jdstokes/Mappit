@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mappit", "Assembly-CSharp.csproj", "{5B641340-80D5-DCED-7937-DF2CF34C42DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mappit", "Assembly-CSharp-Editor.csproj", "{E693204B-916E-5889-169C-42D10D52AE5F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +13,6 @@ Global
 		{5B641340-80D5-DCED-7937-DF2CF34C42DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B641340-80D5-DCED-7937-DF2CF34C42DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B641340-80D5-DCED-7937-DF2CF34C42DF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E693204B-916E-5889-169C-42D10D52AE5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E693204B-916E-5889-169C-42D10D52AE5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E693204B-916E-5889-169C-42D10D52AE5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E693204B-916E-5889-169C-42D10D52AE5F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

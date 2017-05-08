@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Entities/Tasks/pointingtask/PointingTask.unity
+- path: Assets/Entities/Tasks/Mappit/MapLearn.unity
   isLoaded: 1
   isActive: 1
