@@ -12,10 +12,10 @@ public class mapScore : MonoBehaviour {
 		 loseUI.SetActive(false);
 	}
 	public void mapScoreUIswitch(){
-		if(GameControl.GetScore() >= GameControl.thresh){
+		if(GameControl_map.GetScore() >= GameControl_map.thresh){
 			winUI.SetActive(true);
 		}
-		else if(Experiment1.round_count == GameControl.maxRounds - 1){
+		else if(Experiment1.round_count == GameControl_map.maxRounds - 1){
 			winUI.SetActive(true);
 		}
 		else

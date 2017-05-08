@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
-public class GameControl : MonoBehaviour {
+public class GameControl_map : MonoBehaviour {
 
 
 	public static string  selectedStoreName;
@@ -14,7 +14,7 @@ public class GameControl : MonoBehaviour {
 	public static List<Store> stores_all = new List<Store>();
 	public static List<string> store_names = new List<string>();
 	public static bool drawMode = true; 
-	public static GameControl control;
+	public static GameControl_map control;
 	public static GetMapScore mapScore;
 	public static float thresh = 8;
 	public static string subjectID;

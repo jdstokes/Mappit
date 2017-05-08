@@ -56,7 +56,7 @@ void OnMouseDown(){
 
 		if(dragable){
 		mouseDown = true;
-		GameControl.selectedStoreName = "";
+		GameControl_map.selectedStoreName = "";
 
 
 		if (getStartingPosition) {
@@ -84,7 +84,7 @@ void OnMouseUp(){
 void OnMouseDrag(){
 
 			if(dragable){
-			GameControl.selectedStoreName = "";
+			GameControl_map.selectedStoreName = "";
 			screenPoint = Camera.main.WorldToScreenPoint (gameObject.transform.position);
 			offset = Camera.main.ScreenToWorldPoint (new Vector3 (Input.mousePosition.x, Input.mousePosition.y, screenPoint.z)) - gameObject.transform.position - cursorOffset;
 			gameObject.transform.position = Vector3.SmoothDamp (gameObject.transform.position, gameObject.transform.position + offset, ref  velocity, .02F);
@@ -125,17 +125,17 @@ void OnMouseExit() {
 
 void PresentStoreNameOn(){
 		if (!mouseDown) {
-			GameControl.selectedStoreName = gameObject.name;
-			GameControl.selectedStorePosition = gameObject.transform.position;
+			GameControl_map.selectedStoreName = gameObject.name;
+			GameControl_map.selectedStorePosition = gameObject.transform.position;
 			
 			Collider collider = gameObject.GetComponent<Collider> (); 
-			GameControl.selectedStoreSize = collider.bounds.size;
+			GameControl_map.selectedStoreSize = collider.bounds.size;
 		}	
 
 	}
 
 void PresentStoreNameOff(){
-		GameControl.selectedStoreName = "";
+		GameControl_map.selectedStoreName = "";
 
 	}
 	

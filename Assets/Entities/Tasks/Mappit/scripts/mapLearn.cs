@@ -13,10 +13,10 @@ public class mapLearn : MonoBehaviour {
 
 
 	void  GetStoreCoordinates(){
-		GameControl.stores_all.Clear ();
+		GameControl_map.stores_all.Clear ();
 		foreach (Transform store in shops.transform) {
-			GameControl.stores_all.Add (new Store (store.name, store.position, store.localEulerAngles));
-			GameControl.store_names.Add (store.name);
+			GameControl_map.stores_all.Add (new Store (store.name, store.position, store.localEulerAngles));
+			GameControl_map.store_names.Add (store.name);
 
 			}
 			

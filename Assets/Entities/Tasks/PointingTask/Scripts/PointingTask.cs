@@ -33,7 +33,7 @@ public class PointingTask : MonoBehaviour {
 		
 
 		Directory.CreateDirectory(Application.dataPath + "/Data/" +  playerID);
-		dataf = appDir + "/" + "Data" + "/" + playerID + "/"  + "test.txt";
+		dataf = appDir + "/" + "Data" + "/" + playerID + "/"  + "jrd.txt";
 		newFile = new StreamWriter(dataf,true);
 		newFile.Close();
 		//Check to see if data file exists. If not,create file
@@ -101,7 +101,7 @@ public class PointingTask : MonoBehaviour {
 
 
 	void LogData(){
-		string line = index.ToString() + '\t' + question.text+ '\t' + arrow.transform.rotation + '\t' + '\n';
+		string line = index.ToString() + '\t' + question.text+ '\t' + arrow.transform.rotation + '\t' + Experiment1.old_round_count + '\n';
 //		File.AppendAllText( dataf,line);
 //		TextWriter tw = new StreamWriter(dataf);
 //		tw.WriteLine(line);

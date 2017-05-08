@@ -9,7 +9,7 @@ public class score : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start(){
-		score2print = GameControl.GetScore();
+		score2print = GameControl_map.GetScore();
     	txt = gameObject.GetComponent<Text>(); 
 		txt.text="Score : " + score2print.ToString ("F0") + " correct";
 

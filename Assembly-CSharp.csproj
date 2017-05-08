@@ -54,7 +54,7 @@
      <Compile Include="Assets\Entities\Menu\Scripts\ReturnToMainMenu.cs" />
      <Compile Include="Assets\Entities\Menu\Scripts\SceneAndURLLoader.cs" />
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\ExampleClass.cs" />
-     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\GameControl.cs" />
+     <Compile Include="Assets\Entities\Tasks\Mappit\scripts\GameControl_map.cs" />
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\GetMapScore.cs" />
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\InitializeUI.cs" />
      <Compile Include="Assets\Entities\Tasks\Mappit\scripts\InstructionsOff.cs" />

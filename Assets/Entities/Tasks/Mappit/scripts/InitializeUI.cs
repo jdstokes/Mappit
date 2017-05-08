@@ -14,7 +14,7 @@ public class InitializeUI : MonoBehaviour {
 	}
 	void Start () {
 
-		if (GameControl.subjectID == null){
+		if (GameControl_map.subjectID == null){
 
 			ui_ID.SetActive(true);
 

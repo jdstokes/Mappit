@@ -18,7 +18,7 @@ public class Experiment1 : MonoBehaviour {
 	static public List<string> runList = new List<string>();
 	static public int jrd_count = 0;
 	static public int round_count;
-
+	static public int old_round_count;
 	void Awake() {
 
 		if (instance != null) {
@@ -65,6 +65,7 @@ public class Experiment1 : MonoBehaviour {
 	static public void LoadNextModule(){
 
 		if( !(curModule == blockList.Count -1)){
+		old_round_count = round_count;
 		round_count = 0;
 		curModule ++;
 		SceneManager.LoadScene(blockList[curModule]);

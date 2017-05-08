@@ -1,0 +1,18 @@
+1	Imagine standing in the Barber, facing the Toy Store; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	1
+
+2	Imagine standing in the Barber, facing the Florist; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	1
+
+3	Imagine standing in the Dentist, facing the Book Store; point to the Barber.	(0.5, 0.5, 0.5, -0.5)	1
+
+4	Imagine standing in the Bike Shop, facing the Toy Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	1
+
+5	Imagine standing in the Bike Shop, facing the Florist; point to the Toy Store.	(0.5, 0.5, 0.5, -0.5)	1
+
+6	Imagine standing in the Bike Shop, facing the Pet Store; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	1
+
+7	Imagine standing in the Pet Store, facing the Toy Store; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	1
+
+8	Imagine standing in the Barber, facing the Toy Store; point to the Bike Shop.	(0.5, 0.5, 0.5, -0.5)	1
+
+9	Imagine standing in the Barber, facing the Florist; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	1
+

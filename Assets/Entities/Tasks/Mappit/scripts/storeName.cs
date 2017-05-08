@@ -15,10 +15,10 @@ public class storeName : MonoBehaviour {
 		txt = gameObject.GetComponent<Text>(); 
 		rectTransform = gameObject.GetComponent<RectTransform>(); 
 
-		txt.text=GameControl.selectedStoreName;
-		x =GameControl.selectedStorePosition.x + GameControl.selectedStoreSize.x;
-		y =GameControl.selectedStorePosition.y;
-		z =GameControl.selectedStorePosition.z + GameControl.selectedStoreSize.z;
+		txt.text=GameControl_map.selectedStoreName;
+		x =GameControl_map.selectedStorePosition.x + GameControl_map.selectedStoreSize.x;
+		y =GameControl_map.selectedStorePosition.y;
+		z =GameControl_map.selectedStorePosition.z + GameControl_map.selectedStoreSize.z;
 		gameObject.transform.position = Camera.main.WorldToScreenPoint(new Vector3(x,y,z)); 
 //		Debug.Log (rectTransform.sizeDelta); 
 //		Debug.Log (GameControl.selectedStoreSize);

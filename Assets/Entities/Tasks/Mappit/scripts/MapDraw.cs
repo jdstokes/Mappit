@@ -17,7 +17,7 @@ public class MapDraw : MonoBehaviour {
 	private GameObject house;
 	private Vector3 startPosition;
 	private Vector3 colliderSize;
-	private Collider collider;
+	private Collider curCollider;
 	public float spacing = 1.5f; //multiplier of store size
 	
 	private List<Transform> storeTrans = new List<Transform>();
@@ -31,7 +31,7 @@ public class MapDraw : MonoBehaviour {
 		background = GameObject.Find ("Background");
 		mapDrawCanvas = GameObject.Find ("Canvas");
 	    Directory.CreateDirectory(Application.dataPath + "/Data/");
-		newFile = new StreamWriter(GameControl.subjectID + "_output.txt",true);
+		newFile = new StreamWriter(GameControl_map.subjectID + "_output.txt",true);
 		newFile.Close();
 
 
@@ -51,7 +51,7 @@ public class MapDraw : MonoBehaviour {
 		
 	void GetBaseCoordinates(){
 
-		foreach(Store store in GameControl.stores_all){
+		foreach(Store store in GameControl_map.stores_all){
 		foreach(Transform child in  house.transform){
 		
 //				stores.Add (new Store (child.name, child.position, child.localEulerAngles));
@@ -69,7 +69,7 @@ public void GetMapCoordinates(){
 
 
 
-		foreach(Store store in GameControl.stores_all){
+		foreach(Store store in GameControl_map.stores_all){
 			foreach(Transform child in  house.transform){
 				
 				//				stores.Add (new Store (child.name, child.position, child.localEulerAngles));
@@ -133,8 +133,8 @@ IEnumerator CreateRooms(){
 		storeRoom.transform.SetParent(house.transform,true);
 		storeRoom.transform.position = startPosition;
 		storeRoom.transform.localEulerAngles = new Vector3(0f,90f,0f);
-		collider = storeRoom.gameObject.GetComponent<Collider>();
-		colliderSize = collider.bounds.size;
+		curCollider = storeRoom.gameObject.GetComponent<Collider>();
+		colliderSize = curCollider.bounds.size;
 		startPosition = new Vector3(startPosition.x,startPosition.y ,startPosition.z - (colliderSize.z*spacing));
 		yield return null;
 		
