@@ -55,13 +55,15 @@ public void GetID(){
 public void CheckID(){
 
 	string appDir = Directory.GetCurrentDirectory();
-	if(!File.Exists(Application.dataPath + "/textFiles/" + studyCode + subjectID + ".txt")){
-			print(studyCode + subjectID + ".txt does not exist");
+    TextAsset textsText = Resources.Load(PlayerPrefs.GetString("playerID"))  as TextAsset;      
+
+	if(!textsText){
+			print(PlayerPrefs.GetString("playerID")+ ".txt does not exist");
 			warning.text = "Incorrect ID";
 
 	}
-	else if (!Directory.Exists(appDir + "/data/" + studyCode + subjectID) ) {
-		Directory.CreateDirectory(appDir + "/data/" + studyCode + subjectID);
+	else if (!Directory.Exists(appDir + "/data/" + studyCode + subjectID)) {
+		    Directory.CreateDirectory(appDir + "/data/" + studyCode + subjectID);
 			warning.text = "";
 			print(subjectID + " data directory created");
 			PlayerPrefs.SetString("playerID",studyCode + subjectID);
@@ -74,6 +76,7 @@ public void CheckID(){
 	}
 
 
+	
 }
 
 	public void ResetID(){

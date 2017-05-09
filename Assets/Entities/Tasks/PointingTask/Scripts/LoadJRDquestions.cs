@@ -8,26 +8,21 @@ using System.IO;
 
 	public static List<JRD> JRDlist = new List<JRD>();
 
-	void Awake () {
-//		string appDir = Directory.GetCurrentDirectory();
+	void Awake () 
+    {
 
-		StreamReader reader=  new StreamReader(Application.dataPath + "/textFiles/" + PlayerPrefs.GetString("playerID") + ".txt");
 
-		int cnt =0;
-		while(!reader.EndOfStream)
-		{
-			string curLine = reader.ReadLine();
-			if(!string.IsNullOrEmpty(curLine)){
-			cnt++;
-//			print(curLine);
-			JRDlist.Add(new JRD(curLine,cnt));
-			}
+		TextAsset textsText = Resources.Load(PlayerPrefs.GetString("playerID"))  as TextAsset;
+		
+		string[] parts = textsText.text.Trim().Split(new char[] { '\r','\n' });
+		int cnt = 0;
+
+		foreach(string line in parts){
+			cnt ++;
+		    if (line.Trim().Length > 0) JRDlist.Add(new JRD(line,cnt));
 
 		}
 
-		reader.Close();
-	}
 
-
-
+    }
 }

@@ -67,12 +67,13 @@ public class PointingTask : MonoBehaviour {
 			    if (Input.GetKeyDown(KeyCode.Return))
                 {
 			         StartCoroutine(SetupNextTrial());
+					 question.text = "";
 			    
 			    }
-			else if (!nextTrial)
-			{
-				question.text = "";
-			}
+//			else if (!nextTrial)
+//			{
+////				question.text = "";
+//			}
 		    }
         }
 		else{

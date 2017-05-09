@@ -8,7 +8,7 @@ public class Experiment1 : MonoBehaviour {
 
 //	static Experiment1 instance = null;
 	public List<string> tasks = new List<string>();
-	public int numRuns = 6;
+	private int numRuns = 20;
 	static public int curModule = 0;
 	public string guiScene;
 	public bool gui = true;

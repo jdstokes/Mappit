@@ -18,7 +18,7 @@ public class GameControl_map : MonoBehaviour {
 	public static GetMapScore mapScore;
 	public static float thresh = 8;
 	public static string subjectID;
-	public static int maxRounds = 2;
+	public static int maxRounds = 8;
 
 	void Awake () {
 		if(control==null)

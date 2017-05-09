@@ -1,0 +1,64 @@
+1	Imagine standing in the Pet Store, facing the Bike Shop; point to the Toy Store.	(0.5, 0.5, 0.5, -0.5)	1
+
+2	Imagine standing in the Florist, facing the Bike Shop; point to the Pet Store.	(0.5, 0.5, 0.5, -0.5)	1
+
+3	Imagine standing in the Pet Store, facing the Barber; point to the Dentist.	(0.5, 0.5, 0.5, -0.5)	1
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+2	Imagine standing in the Costume Shop, facing the Camera Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+3	Imagine standing in the Ice Cream Parlor, facing the Costume Shop; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+2	Imagine standing in the Costume Shop, facing the Camera Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+3	Imagine standing in the Ice Cream Parlor, facing the Costume Shop; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
+4	Imagine standing in the Gym, facing the Costume Shop; point to the Bakery.	(0.5, 0.5, 0.5, -0.5)	0
+
+5	Imagine standing in the Book Store, facing the Bakery; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
+6	Imagine standing in the Gym, facing the Florist; point to the Fast Food Restaurant.	(0.5, 0.5, 0.5, -0.5)	0
+
+7	Imagine standing in the Costume Shop, facing the Ice Cream Parlor; point to the Fast Food Restaurant.	(0.5, 0.5, 0.5, -0.5)	0
+
+8	Imagine standing in the Gym, facing the Bakery; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+9	Imagine standing in the Book Store, facing the Florist; point to the Costume Shop.	(0.5, 0.5, 0.5, -0.5)	0
+
+10	Imagine standing in the Costume Shop, facing the Ice Cream Parlor; point to the Camera Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+11	Imagine standing in the Book Store, facing the Camera Store; point to the Fast Food Restaurant.	(0.5, 0.5, 0.5, -0.5)	0
+
+12	Imagine standing in the Florist, facing the Gym; point to the Camera Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+13	Imagine standing in the Book Store, facing the Fast Food Restaurant; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
+14	Imagine standing in the Fast Food Restaurant, facing the Florist; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+2	Imagine standing in the Costume Shop, facing the Camera Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+3	Imagine standing in the Ice Cream Parlor, facing the Costume Shop; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+2	Imagine standing in the Costume Shop, facing the Camera Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+3	Imagine standing in the Ice Cream Parlor, facing the Costume Shop; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
+4	Imagine standing in the Gym, facing the Costume Shop; point to the Bakery.	(0.5, 0.5, 0.5, -0.5)	0
+
+1	Imagine standing in the Bakery, facing the Gym; point to the Ice Cream Parlor.	(0.5, 0.5, 0.5, -0.5)	0
+
+2	Imagine standing in the Costume Shop, facing the Camera Store; point to the Book Store.	(0.5, 0.5, 0.5, -0.5)	0
+
+3	Imagine standing in the Ice Cream Parlor, facing the Costume Shop; point to the Florist.	(0.5, 0.5, 0.5, -0.5)	0
+
