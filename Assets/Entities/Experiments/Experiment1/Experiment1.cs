@@ -12,6 +12,7 @@ public class Experiment1 : MonoBehaviour {
 	static public int curModule = 0;
 	public string guiScene;
 	public bool gui = true;
+	public bool debug_mode;
 	private static Experiment1 instance;
 
 	static public List<string> blockList = new List<string>();
@@ -104,10 +105,12 @@ public class Experiment1 : MonoBehaviour {
 
 	void OnGUI(){
 
+		if(debug_mode){
 		if (GUILayout.Button("Debug-skip"))
 			LoadNextModule();
 
-	}
+	    }
+    }
 
 
 }
