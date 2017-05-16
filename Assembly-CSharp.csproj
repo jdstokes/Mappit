@@ -83,6 +83,7 @@
      <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\JRD.cs" />
      <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\LoadJRDquestions.cs" />
      <Compile Include="Assets\Entities\Tasks\PointingTask\Scripts\PointingTask.cs" />
+     <Compile Include="Assets\Entities\endScenes\endScene_gui.cs" />
      <Compile Include="Assets\Landmarks\Unknown Assets\primitives.v1\primitives_testscene\_resources\failscript.cs" />
      <Compile Include="Assets\Landmarks\unprocessed\WaterSources\Water.cs" />
      <None Include="Assets\Landmarks\Unknown Assets\Mobile-Cartoony\ThirdParty\NGUI\Resources\Shaders\Depth.shader" />

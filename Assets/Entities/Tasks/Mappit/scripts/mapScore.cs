@@ -6,6 +6,7 @@ public class mapScore : MonoBehaviour {
 	GameObject winUI;
 	GameObject loseUI;
 	public StreamWriter newFile;
+	private long tmpStartTime;
 
 	void Awake(){
 		 winUI = GameObject.Find("UI_mapscore_finished") as GameObject;
@@ -16,10 +17,11 @@ public class mapScore : MonoBehaviour {
  		Directory.CreateDirectory(Directory.GetCurrentDirectory() + "/Data/");
 		newFile = new StreamWriter(Directory.GetCurrentDirectory()+"/data/"+PlayerPrefs.GetString("playerID") + "/" + PlayerPrefs.GetString("playerID") + "_map.txt",true);
 		if (Experiment1.curModule == 0 && Experiment1.round_count == 1) {
-			newFile.WriteLine ("time\tid\tblock\tattempt\tscore");
+			newFile.WriteLine ("startTime\tendTime\tid\tblock\tattempt\tscore");
 		}
 		newFile.Close();
 
+		tmpStartTime = System.DateTime.Now.Ticks / 100000;
 
 
 	}
@@ -47,7 +49,7 @@ public class mapScore : MonoBehaviour {
 
 	public void LogData(){
 		// retrieve the subject ID, map drawing attempt for this block, and the score they got on this attempt... log it.
-		string line = System.DateTime.Now.Ticks/100000 + "\t" + PlayerPrefs.GetString("playerID") + "\t" + Experiment1.blocknum + "\t" + Experiment1.round_count + "\t" + GameControl_map.GetScore();
+		string line = tmpStartTime + "\t" + System.DateTime.Now.Ticks/100000 + "\t" + PlayerPrefs.GetString("playerID") + "\t" + Experiment1.blocknum + "\t" + Experiment1.round_count + "\t" + GameControl_map.GetScore();
 		// ^^ NOTE: time is being printed in miliseconds. For RT in seconds (2 decimals), subtract two stamp values and divide by 100
 		print (line);
 		newFile = new StreamWriter(Directory.GetCurrentDirectory()+"/data/"+PlayerPrefs.GetString("playerID") + "/" + PlayerPrefs.GetString("playerID") + "_map.txt",true);
