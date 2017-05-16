@@ -20,6 +20,21 @@ public class PointingTask : MonoBehaviour {
 	private string dataf;
 	private StreamWriter newFile;
 
+	//MJS (5/15/2017) - Cooldown timer for JRD responses
+	private bool inCooldown = false; //bool to indicate cooldown timer for response button
+	public int cooldownTime; //input for a JRD response cooldown timer
+
+	private long tmpJRDstartTime;
+
+
+
+	void Awake () {
+		StartCoroutine (responseCooldown ()); //MJS start the cooldown timer
+		tmpJRDstartTime = System.DateTime.Now.Ticks / 100000;
+	}
+
+
+
 	void Start(){
 
         //Configure arrow heading
@@ -33,8 +48,12 @@ public class PointingTask : MonoBehaviour {
 		
 
 		Directory.CreateDirectory(Application.dataPath + "/Data/" +  playerID);
-		dataf = appDir + "/" + "Data" + "/" + playerID + "/"  + "jrd.txt";
+		dataf = appDir + "/" + "Data" + "/" + playerID + "/"  + playerID + "_jrd.txt";
 		newFile = new StreamWriter(dataf,true);
+		if (Experiment1.curModule == 1 && index == 0) {
+			newFile.WriteLine ("startTime\tendTime\tid\tblock\ttrial\tquestion\tresponse");
+			// \taligned"); // removed as this is actually just logging how many attempts from the prior map task
+		}
 		newFile.Close();
 		//Check to see if data file exists. If not,create file
 //		if (!File.Exists(dataf)){
@@ -48,6 +67,7 @@ public class PointingTask : MonoBehaviour {
 
 
 	}
+
 
 
 	void Update () {
@@ -64,7 +84,7 @@ public class PointingTask : MonoBehaviour {
 	
 			    question.text = curJRD.question;
 	
-			    if (Input.GetKeyDown(KeyCode.Return))
+				if (!inCooldown && Input.GetKeyDown(KeyCode.Return)) //MJS-5/15/2017: added !inCooldown &&
                 {
 			         StartCoroutine(SetupNextTrial());
 					 question.text = "";
@@ -79,6 +99,7 @@ public class PointingTask : MonoBehaviour {
 		else{
 		    
 			Experiment1.jrd_count = index;
+			Experiment1.blocknum++;
 			Experiment1.LoadNextModule();
 		}
 	}
@@ -97,12 +118,15 @@ public class PointingTask : MonoBehaviour {
 		compass.SetActive(true);
 		arrow.transform.rotation = arrowStartRot;
 		nextTrial = true;
+		StartCoroutine (responseCooldown ()); //MJS start the cooldown timer
+		tmpJRDstartTime = System.DateTime.Now.Ticks / 100000;
 
 	}
 
 
 	void LogData(){
-		string line = index.ToString() + '\t' + question.text+ '\t' + arrow.transform.rotation + '\t' + Experiment1.old_round_count + '\n';
+		string line = tmpJRDstartTime + "\t" + System.DateTime.Now.Ticks / 100000 + "\t" + PlayerPrefs.GetString ("playerID") + "\t" + Experiment1.blocknum + "\t" + index.ToString () + '\t' + question.text + '\t' + arrow.transform.localRotation.eulerAngles + '\t';
+			//+ Experiment1.old_round_count; //removed as this is actually just logging how many attempts from the prior map task
 //		File.AppendAllText( dataf,line);
 //		TextWriter tw = new StreamWriter(dataf);
 //		tw.WriteLine(line);
@@ -114,6 +138,13 @@ public class PointingTask : MonoBehaviour {
 		newFile = new StreamWriter(dataf,true);
 		newFile.WriteLine(line);
 		newFile.Close();
+	}
+
+	//MJS-5/15/2017: Cooldown function to be called to turn off response button for 3 seconds
+	IEnumerator responseCooldown() {
+		inCooldown = true;
+		yield return new WaitForSeconds(cooldownTime);
+		inCooldown = false;
 	}
 
 }

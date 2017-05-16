@@ -18,8 +18,11 @@ public class Experiment1 : MonoBehaviour {
 	static public List<string> blockList = new List<string>();
 	static public List<string> runList = new List<string>();
 	static public int jrd_count = 0;
-	static public int round_count;
+	static public int round_count = 1;
 	static public int old_round_count;
+	//MJS - 5/15/2017: add variable to count whole blocks
+	public static int blocknum = 1; // updated in PointingTask.cs and logged in mapScore.cs
+
 	void Awake() {
 
 		if (instance != null) {
@@ -67,7 +70,7 @@ public class Experiment1 : MonoBehaviour {
 
 		if( !(curModule == blockList.Count -1)){
 		old_round_count = round_count;
-		round_count = 0;
+		round_count = 1;
 		curModule ++;
 		SceneManager.LoadScene(blockList[curModule]);
 		print("loading module " +curModule + " " + blockList[curModule]);
